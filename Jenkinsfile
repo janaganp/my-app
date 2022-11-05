@@ -16,6 +16,11 @@ node{
     }
     sh 'docker push janaganp/tomimage'
     }
+	stage('Nexus Image Push'){
+        sh "docker login -u admin -p admin123 18.217.49.179:8095"
+        sh "docker tag janaganp/tomimage 18.217.49.179:8095/jana:1.0.0"
+        sh 'docker push 18.217.49.179:8095/jana:1.0.0'
+   }
     stage('Remove Previous Container'){
 	try{
 		sh 'docker rm -f webhosting'
